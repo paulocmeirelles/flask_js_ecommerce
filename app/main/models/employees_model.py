@@ -3,7 +3,7 @@ from ...api.repository import db
 
 class Employees(db.Model):
     __tablename__ = 'employees'
-    employee_number = db.Column(db.Integer, nullable=False)
+    employee_number = db.Column(db.Integer,primary_key=True, nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     extension = db.Column(db.String(10), nullable=False)

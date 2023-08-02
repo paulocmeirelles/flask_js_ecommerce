@@ -11,7 +11,7 @@ _product = ProductDto.product
 @api.route('/')
 class ProductList(Resource):
     @api.doc('list_of_registered_product')
-    @api.marshal_list_with(_product, envelope='data')
+    @api.marshal_list_with(_product)
     def get(self):
         return Product.get()
 
@@ -33,11 +33,11 @@ class ProductList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The Product identifier')
 @api.response(404, 'Product not found.')
-class Product(Resource):
+class ProductByParam(Resource):
     @api.doc('get a product')
     @api.marshal_with(_product)
     def get(self, public_id):
-        id = int(public_id)
+        id = str(public_id).upper()
         product = ProductById.get(id)
         # return {'message': 'Ok', 'status': 'success'}
         if not product:

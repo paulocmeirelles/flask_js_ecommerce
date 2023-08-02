@@ -11,7 +11,7 @@ _order = OrderDto.order
 @api.route('/')
 class OrderList(Resource):
     @api.doc('list_of_registered_order')
-    @api.marshal_list_with(_order, envelope='data')
+    @api.marshal_list_with(_order)
     def get(self):
         return Order.get()
 
@@ -33,8 +33,8 @@ class OrderList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The Order identifier')
 @api.response(404, 'Order not found.')
-class Order(Resource):
-    @api.doc('get a order')
+class OrderByParam(Resource):
+    @api.doc('get an order')
     @api.marshal_with(_order)
     def get(self, public_id):
         id = int(public_id)

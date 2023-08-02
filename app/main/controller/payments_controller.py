@@ -11,7 +11,7 @@ _payment = PaymentDto.payment
 @api.route('/')
 class PaymentList(Resource):
     @api.doc('list_of_registered_payment')
-    @api.marshal_list_with(_payment, envelope='data')
+    @api.marshal_list_with(_payment)
     def get(self):
         return Payment.get()
 
@@ -33,11 +33,11 @@ class PaymentList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The Payment identifier')
 @api.response(404, 'Payment not found.')
-class Payment(Resource):
+class PaymentByParam(Resource):
     @api.doc('get a payment')
     @api.marshal_with(_payment)
     def get(self, public_id):
-        id = int(public_id)
+        id = str(public_id)
         payment = PaymentById.get(id)
         # return {'message': 'Ok', 'status': 'success'}
         if not payment:

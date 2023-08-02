@@ -3,7 +3,7 @@ from ...api.repository import db
 
 class Customers(db.Model):
     __tablename__ = 'customers'
-    customer_number = db.Column(db.Integer, nullable=False)
+    customer_number = db.Column(db.Integer, primary_key=True,nullable=False)
     customer_name = db.Column(db.String(50), nullable=False)
     contact_last_name = db.Column(db.String(50), nullable=False)
     contact_first_name = db.Column(db.String(50), nullable=False)

@@ -11,7 +11,7 @@ _office = OfficeDto.office
 @api.route('/')
 class OfficeList(Resource):
     @api.doc('list_of_registered_office')
-    @api.marshal_list_with(_office, envelope='data')
+    @api.marshal_list_with(_office)
     def get(self):
         return Office.get()
 
@@ -33,11 +33,11 @@ class OfficeList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The Office identifier')
 @api.response(404, 'Office not found.')
-class Office(Resource):
-    @api.doc('get a office')
+class OfficeByParam(Resource):
+    @api.doc('get an office')
     @api.marshal_with(_office)
     def get(self, public_id):
-        id = int(public_id)
+        id = str(public_id)
         office = OfficeById.get(id)
         # return {'message': 'Ok', 'status': 'success'}
         if not office:

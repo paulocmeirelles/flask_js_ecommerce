@@ -4,7 +4,7 @@ class EmployeeDto:
     api = Namespace('employees', description='DTO related to table Employees')
     employee = api.model('employees', {
         'employee_number': fields.Integer(required=True),
-        "last_name": fields.Boolean(required=True),
+        "last_name": fields.String(required=True),
         "first_name": fields.String(required=True),
         "extension": fields.String(required=True),
         "email": fields.String(required=True),

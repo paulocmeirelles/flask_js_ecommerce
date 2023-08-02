@@ -11,7 +11,7 @@ _customer = CustomerDto.customer
 @api.route('/')
 class CustomerList(Resource):
     @api.doc('list_of_registered_customer')
-    @api.marshal_list_with(_customer, envelope='data')
+    @api.marshal_list_with(_customer)
     def get(self):
         return Customer.get()
 
@@ -33,7 +33,7 @@ class CustomerList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The Customer identifier')
 @api.response(404, 'Customer not found.')
-class Customer(Resource):
+class CustomerByParam(Resource):
     @api.doc('get a customer')
     @api.marshal_with(_customer)
     def get(self, public_id):
@@ -45,7 +45,7 @@ class Customer(Resource):
         else:
             return customer
 
-    def delete(public, public_id):
+    def delete(self, public_id):
         id = int(public_id)
         customer = CustomerById.delete(id)
         return customer

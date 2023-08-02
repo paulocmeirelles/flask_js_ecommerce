@@ -11,7 +11,7 @@ _employee = EmployeeDto.employee
 @api.route('/')
 class EmployeeList(Resource):
     @api.doc('list_of_registered_employee')
-    @api.marshal_list_with(_employee, envelope='data')
+    @api.marshal_list_with(_employee)
     def get(self):
         return Employee.get()
 
@@ -33,8 +33,8 @@ class EmployeeList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The Employee identifier')
 @api.response(404, 'Employee not found.')
-class Employee(Resource):
-    @api.doc('get a employee')
+class EmployeeByParam(Resource):
+    @api.doc('get an employee')
     @api.marshal_with(_employee)
     def get(self, public_id):
         id = int(public_id)

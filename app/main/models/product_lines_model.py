@@ -16,7 +16,7 @@ class HexByteString(TypeDecorator):
     
 class Product_lines(db.Model):
     __tablename__ = 'product_lines'
-    product_line = db.Column(db.String(50), nullable=False)
+    product_line = db.Column(db.String(50), primary_key=True,nullable=False)
     text_description = db.Column(db.String(4000), nullable=True)
     html_description = db.Column(db.String(255), nullable=True, default=None)
     image = db.Column(HexByteString, nullable=True, default=None)

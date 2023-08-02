@@ -11,7 +11,7 @@ _orderdetail = OrderDetailDto.order_detail
 @api.route('/')
 class OrderDetailList(Resource):
     @api.doc('list_of_registered_orderdetail')
-    @api.marshal_list_with(_orderdetail, envelope='data')
+    @api.marshal_list_with(_orderdetail)
     def get(self):
         return OrderDetail.get()
 
@@ -33,8 +33,8 @@ class OrderDetailList(Resource):
 @api.route('/<public_id>')
 @api.param('public_id', 'The OrderDetail identifier')
 @api.response(404, 'OrderDetail not found.')
-class OrderDetail(Resource):
-    @api.doc('get a orderdetail')
+class OrderDetailByParam(Resource):
+    @api.doc('get an orderdetail')
     @api.marshal_with(_orderdetail)
     def get(self, public_id):
         id = int(public_id)
