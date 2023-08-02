@@ -68,7 +68,7 @@ class Product():
             return response_object, 201
 
 
-class PaymentById():
+class ProductById():
     def delete(product_code):
         product = Products.query.filter_by(product_code=product_code).first()
         if not product:

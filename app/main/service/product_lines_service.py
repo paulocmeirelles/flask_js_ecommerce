@@ -57,7 +57,7 @@ class Product_line():
             return response_object, 201
 
 
-class PaymentById():
+class ProductLineById():
     def delete(product_line):
         product_line = Product_lines.query.filter_by(product_line=product_line).first()
         if not product_line:
